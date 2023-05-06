@@ -1,11 +1,10 @@
 import fs from 'fs'
 import path from 'path'
-import stringify from "json-stringify-pretty-compact";
+import stringify from 'json-stringify-pretty-compact'
 let dir = process.cwd()
 
-
-const read = function (opts = {}) {
-  let file = opts.file || path.join(dir, './_model.json')
+const load = function (file) {
+  file = file || path.join(dir, './_model.json')
   if (fs.existsSync(file)) {
     let json = JSON.parse(fs.readFileSync(file).toString())
     return json || {}
@@ -13,10 +12,10 @@ const read = function (opts = {}) {
   return { prev: {}, depth: 0, c: '', val: {} }
 }
 
-const write = function (model, opts = {}) {
-  let file = opts.file || path.join(dir, './_model.json')
+const save = function (file, model) {
+  file = file || path.join(dir, './_model.json')
   // fs.writeFileSync(file, JSON.stringify(model, null, 2))
   fs.writeFileSync(file, stringify(model, { maxLength: 50 }))
 }
 
-export { read, write }
+export { load, save }

@@ -24,6 +24,9 @@ const getByPath = function (root, path) {
   let chars = path.split('')
   let node = root
   for (let i = 0; i < chars.length; i += 1) {
+    if (!node.prev[chars[i]]) {
+      return node
+    }
     node = node.prev[chars[i]]
   }
   return node
@@ -34,6 +37,9 @@ const unpack = function (str) {
   let node = root
   let depth = 0
   str.split(/([\[,\]])/).forEach(ch => {
+    if (!ch) {
+      return
+    }
     if (ch === '[') {
       depth += 1
       return
@@ -43,10 +49,8 @@ const unpack = function (str) {
     } else if (ch === ',') {
       return
     }
-    let [, c, val] = ch.split(/^([a-z])/)
-    if (!c) {
-      return
-    }
+    let [c, val] = ch.split(/([A-Z]+)/)
+    // console.log(' '.repeat(depth), c)
     let n = { c, prev: {}, depth, path: c + node.path, val }
     if (depth > node.depth) {
       // go down a level
@@ -56,13 +60,18 @@ const unpack = function (str) {
       node.prev[c] = n
     } else {
       // go backward a level
-      let chars = n.path.split('').reverse()
-      n.path = chars.slice(0, depth).join('')
-      console.log('back to ', n.path, depth)
+      let chars = node.path.split('').reverse()
+      n.path = chars.slice(0, depth - 1).join('')
       node = getByPath(root, n.path)
       node.prev[c] = n
+      node = n
     }
   })
+  // clean it up
+  depthFirst(root, (node) => {
+    delete node.path
+  })
+  console.dir(root, { depth: 15 })
   return root
 }
 export { pack, unpack }
