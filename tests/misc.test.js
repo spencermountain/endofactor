@@ -10,6 +10,7 @@ test('basic', function (t) {
     ['douse', 'V'],
   ]
   let model = add(pairs, {})
+  model = unpack(pack(model))
   pairs.forEach(a => {
     let [w, val] = a
     let res = get(w, model)
@@ -32,6 +33,7 @@ test('fallback', function (t) {
     ['', 'R'],
   ]
   let model = add(pairs, {})
+  // model = unpack(pack(model))
   t.equal(get('meet', model), 'V')
   t.equal(get('meat', model), 'N')
   t.equal(get('bat', model), 'NV')

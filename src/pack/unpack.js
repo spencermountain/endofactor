@@ -1,21 +1,10 @@
 import { depthFirst } from '../lib/_crawl.js'
 
 
-const getByPath = function (root, path) {
-  let chars = path.split('')
-  let node = root
-  for (let i = 0; i < chars.length; i += 1) {
-    if (!node.prev[chars[i]]) {
-      return node
-    }
-    node = node.prev[chars[i]]
-  }
-  return node
-}
 
-const unpack = function (str) {
-  let root = { c: '', prev: {}, depth: 0, path: '' }
-  let node = root
+
+const tokenize = function (str) {
+  let tokens = []
   let depth = 0
   str.split(/([\[,\]])/).forEach(ch => {
     if (!ch) {
@@ -31,27 +20,75 @@ const unpack = function (str) {
       return
     }
     let [c, val] = ch.split(/([A-Z]+)/)
-    // console.log(' '.repeat(depth), c)
-    let n = { c, prev: {}, depth, path: c + node.path, val }
-    if (depth > node.depth) {
-      // go down a level
-      node.prev[c] = n
-      node = n
-    } else if (depth === node.depth) {
-      node.prev[c] = n
-    } else {
-      // go backward a level
-      let chars = node.path.split('').reverse()
-      n.path = chars.slice(0, depth - 1).join('')
-      node = getByPath(root, n.path)
-      node.prev[c] = n
-      node = n
-    }
+    tokens.push({ c, val, depth })
   })
-  // clean it up
-  depthFirst(root, (node) => {
-    delete node.path
+  return tokens
+}
+
+const addParent = function (tokens) {
+  let last = 0
+  let parent = ''
+  tokens.forEach((token, i) => {
+    token.prev = token.prev || {}
+    if (token.depth === last) {
+      // same parent
+      token.parent = parent
+    } else if (token.depth > last) {
+      // go down
+      let back = tokens[i - 1]
+      parent = back.c + (back.parent || '')
+      token.parent = parent
+    } else if (token.depth < last) {
+      // go back up the tree
+      let back = tokens[i - 1]
+      let want = back.parent.substring(back.parent.length - token.depth)
+      token.parent = want
+    }
+    last = token.depth
+  })
+  // sort by shallow-first
+  tokens = tokens.sort((a, b) => {
+    if (a.parent.length > b.parent.length) {
+      return 1
+    } else if (a.parent.length < b.parent.length) {
+      return -1
+    }
+    return 0
+  })
+  return tokens
+}
+
+const getByparent = function (root, parent) {
+  let chars = parent.split('').reverse()
+  let node = root
+  for (let i = 0; i < chars.length; i += 1) {
+    if (!node.prev[chars[i]]) {
+      return node
+    }
+    node = node.prev[chars[i]]
+  }
+  return node
+}
+
+const build = function (tokens) {
+  let root = { c: '', prev: {}, depth: 0, parent: '' }
+  tokens.forEach(token => {
+    let p = getByparent(root, token.parent)
+    p.prev[token.c] = token
   })
   return root
+}
+
+const unpack = function (str) {
+  let tokens = tokenize(str)
+  tokens = addParent(tokens)
+  // console.log(tokens)
+  let model = build(tokens)
+  // clean it up
+  depthFirst(model, (node) => {
+    delete node.parent
+  })
+  // console.dir(model, { depth: 15 })
+  return model
 }
 export default unpack

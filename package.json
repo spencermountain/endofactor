@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "npm run version && rollup -c --silent",
-    "watch": "node ./scratch.js",
+    "watch": "amble ./scratch.js",
     "test": "tape \"./tests/**/*.test.js\" | tap-dancer",
     "testb": "npm run test:smoke && TESTENV=prod npm run test"
   },
