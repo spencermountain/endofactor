@@ -17,7 +17,7 @@ const pack = function (model) {
       txt += ']'.repeat(diff)
     }
     last = node.depth
-    txt += `${node.c || ''}${node.val}`
+    txt += `${node.c || ''}${node.val || ''}`
   })
   // txt += ']'.repeat(last)
   return txt

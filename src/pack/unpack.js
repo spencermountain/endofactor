@@ -1,8 +1,5 @@
 import { depthFirst } from '../lib/_crawl.js'
 
-
-
-
 const tokenize = function (str) {
   let tokens = []
   let depth = 0
@@ -31,22 +28,22 @@ const addParent = function (tokens) {
   tokens.forEach((token, i) => {
     token.prev = token.prev || {}
     if (token.depth === last) {
-      // same parent
+      // === same parent ==
       token.parent = parent
     } else if (token.depth > last) {
-      // go down
+      // >>> go down >>
       let back = tokens[i - 1]
       parent = back.c + (back.parent || '')
       token.parent = parent
     } else if (token.depth < last) {
-      // go back up the tree
+      // <<< go back up the tree <<<
       let back = tokens[i - 1]
       let want = back.parent.substring(back.parent.length - token.depth)
       token.parent = want
     }
     last = token.depth
   })
-  // sort by shallow-first
+  // sort by shallowest-first
   tokens = tokens.sort((a, b) => {
     if (a.parent.length > b.parent.length) {
       return 1

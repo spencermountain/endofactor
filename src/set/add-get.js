@@ -25,14 +25,18 @@ const add = function (pairs, model, opts) {
 const get = function (str, model) {
   let chars = str.split('').reverse()
   let node = model
+  let val = model.val || null
   for (let i = 0; i < chars.length; i += 1) {
     let c = chars[i]
     if (!node.prev[c]) {
-      return node.val || null
+      break
     }
     node = node.prev[c]
+    if (node.val) {
+      val = node.val
+    }
   }
-  return node.val || null
+  return val
 }
 
 export { add, get }

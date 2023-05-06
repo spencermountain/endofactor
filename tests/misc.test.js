@@ -1,4 +1,4 @@
-import { add, get, pack, unpack, } from '../src/index.js'
+import { add, get, pack, unpack, trim } from '../src/index.js'
 import test from 'tape'
 
 test('basic', function (t) {
@@ -11,6 +11,7 @@ test('basic', function (t) {
   ]
   let model = add(pairs, {})
   model = unpack(pack(model))
+  model = trim(model)
   pairs.forEach(a => {
     let [w, val] = a
     let res = get(w, model)

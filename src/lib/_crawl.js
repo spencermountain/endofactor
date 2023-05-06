@@ -15,4 +15,21 @@ const depthFirst = (root, fn) => {
     }
   }
 }
-export { depthFirst }
+
+// [a, b, a1, b1]
+const breadthFirst = root => {
+  let list = []
+  let queue = [root]
+  while (queue.length > 0) {
+    // get first
+    let node = queue.shift()
+    // add to list
+    list.push(node)
+    // add kids to queue
+    Object.values(node.prev).forEach(n => {
+      queue.push(n)
+    })
+  }
+  return list
+}
+export { depthFirst, breadthFirst }
