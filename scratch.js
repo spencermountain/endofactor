@@ -10,13 +10,20 @@ let pairs = [
   ['mouse', 'N'],
   ['house', 'N'],
   ['douse', 'V'],
+  // ['', 'R'],
 ]
+console.log('\ninput:')
+console.log(pairs)
 
+console.log('\nmodel:')
 let model = add(pairs)
-model = deduce(model)
 console.log(fmt(model))
 
-console.log(get('mouse', model))
 test(pairs, model)
+console.log(get('mouse', model))
 console.log(get('slam', model))
+console.log(get('slur', model))
 console.log(get('clouse', model))
+
+console.log('\npacked:')
+console.log(pack(model))

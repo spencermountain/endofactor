@@ -9,12 +9,11 @@ const load = function (file) {
     let json = JSON.parse(fs.readFileSync(file).toString())
     return json || {}
   }
-  return { prev: {}, depth: 0, c: '', val: {} }
+  return { c: '', prev: {}, depth: 0, raw: {} }
 }
 
 const save = function (file, model) {
   file = file || path.join(dir, './_model.json')
-  // fs.writeFileSync(file, JSON.stringify(model, null, 2))
   fs.writeFileSync(file, stringify(model, { maxLength: 50 }))
 }
 

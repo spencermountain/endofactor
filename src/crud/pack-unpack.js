@@ -6,17 +6,19 @@ const pack = function (model) {
   depthFirst(model, (node) => {
     if (node.depth > last) {
       let diff = node.depth - last
+      // txt += '\n' + ' '.repeat(node.depth)      // debug
       txt += '['.repeat(diff)
     } else if (node.depth === last) {
       txt += ','
     } else {
       let diff = last - node.depth
       txt += ']'.repeat(diff)
+      // txt += '\n' + ' '.repeat(node.depth) //debug
     }
     last = node.depth
     txt += `${node.c}${node.val}`
   })
-  txt += ']'.repeat(last)
+  // txt += ']'.repeat(last)
   return txt
 }
 
@@ -71,7 +73,6 @@ const unpack = function (str) {
   depthFirst(root, (node) => {
     delete node.path
   })
-  console.dir(root, { depth: 15 })
   return root
 }
 export { pack, unpack }

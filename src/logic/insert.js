@@ -5,6 +5,11 @@ const insert = function (str, tag, model, opts) {
   tag = tag.trim().toUpperCase()
   let chars = str.split('').reverse().slice(0, MAX)
   let node = model
+  // allow '' to tag the root
+  if (tag && !str) {
+    model.raw[tag] = model.raw[tag] || 0
+    model.raw[tag] += 1
+  }
   chars.forEach((c, i) => {
     node.prev[c] = node.prev[c] || { raw: {}, prev: {}, c, depth: i + 1, }
     node = node.prev[c]

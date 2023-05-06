@@ -13,10 +13,8 @@ const add = function (pairs, model, opts) {
     let [w, tag] = a
     model = insert(w, tag, model)
   })
-  // model = deduce(model, opts)
+  model = deduce(model, opts)
   // fmt(model)
-
-
   return model
 }
 
@@ -28,11 +26,11 @@ const get = function (str, model) {
   for (let i = 0; i < chars.length; i += 1) {
     let c = chars[i]
     if (!node.prev[c]) {
-      return node.val
+      return node.val || null
     }
     node = node.prev[c]
   }
-  return node.val
+  return node.val || null
 }
 
 export { add, get }

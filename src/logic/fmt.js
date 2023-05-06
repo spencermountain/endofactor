@@ -8,9 +8,9 @@ const i = str => '\x1b[3m' + str + '\x1b[0m'
 const fmt = function (model) {
   let out = ''
   depthFirst(model, (node) => {
-    // ┣ ┠
-    out += dim('│ '.repeat(node.depth)) + b(blue(node.c)) + ' ' + i(dim(':' + node.val)) + '\n'//
-    // console.log('┠ '.repeat(node.depth) + node.c)//+ '-' + node.val
+    let key = node.val ? node.c || "." : ''
+    let val = node.val ? ':' + node.val : ''
+    out += dim('│ '.repeat(node.depth)) + b(blue(key)) + ' ' + i(dim(val)) + '\n'//
   })
   return out
 }
