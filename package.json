@@ -1,0 +1,43 @@
+{
+  "name": "endofactor",
+  "version": "0.0.1",
+  "description": "suffix trie classifier",
+  "main": "src/index.js",
+  "sideEffects": false,
+  "type": "module",
+  "author": "Spencer Kelly <spencermountain@gmail.com> (http://spencermounta.in)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spencermountain/endofactor.git"
+  },
+  "scripts": {
+    "build": "npm run version && rollup -c --silent",
+    "watch": "node ./scratch.js",
+    "test": "tape \"./tests/**/*.test.js\" | tap-dancer",
+    "testb": "npm run test:smoke && TESTENV=prod npm run test"
+  },
+  "dependencies": {
+    "json-stringify-pretty-compact": "^4.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-terser": "^0.4.1",
+    "amble": "1.3.0",
+    "eslint": "8.39.0",
+    "rollup": "3.7.4",
+    "shelljs": "^0.8.5",
+    "tap-dancer": "0.3.4",
+    "tape": "5.6.3"
+  },
+  "eslintIgnore": [
+    "builds/*.js",
+    "*.ts",
+    "_old/**",
+    "_tests/**"
+  ],
+  "bugs": {
+    "url": "https://github.com/spencermountain/endofactor/issues"
+  },
+  "homepage": "https://github.com/spencermountain/endofactor#readme",
+  "license": "MIT"
+}
