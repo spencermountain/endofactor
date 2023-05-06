@@ -6,9 +6,9 @@ sh.exec('rm ./_model.json')
 
 let pairs = [
   ['swim', 'N'],
-  ['swam', 'V'],
+  // ['swam', 'V'],
   ['mouse', 'N'],
-  ['house', 'N'],
-  ['douse', 'V'],
+  // ['house', 'N'],
+  // ['douse', 'V'],
 ]
 add(pairs)

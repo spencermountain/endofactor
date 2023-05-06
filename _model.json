@@ -1,7 +1,7 @@
 {
   "prev": {
     "m": {
-      "raw": {"N": 1, "V": 1},
+      "raw": {"N": 1},
       "prev": {
         "i": {
           "raw": {"N": 1},
@@ -25,46 +25,23 @@
           "c": "i",
           "depth": 2,
           "val": "N"
-        },
-        "a": {
-          "raw": {"V": 1},
-          "prev": {
-            "w": {
-              "raw": {"V": 1},
-              "prev": {
-                "s": {
-                  "raw": {"V": 1},
-                  "prev": {},
-                  "c": "s",
-                  "depth": 4,
-                  "val": "V"
-                }
-              },
-              "c": "w",
-              "depth": 3,
-              "val": "V"
-            }
-          },
-          "c": "a",
-          "depth": 2,
-          "val": "V"
         }
       },
       "c": "m",
       "depth": 1,
-      "val": "NV"
+      "val": "N"
     },
     "e": {
-      "raw": {"N": 2, "V": 1},
+      "raw": {"N": 1},
       "prev": {
         "s": {
-          "raw": {"N": 2, "V": 1},
+          "raw": {"N": 1},
           "prev": {
             "u": {
-              "raw": {"N": 2, "V": 1},
+              "raw": {"N": 1},
               "prev": {
                 "o": {
-                  "raw": {"N": 2, "V": 1},
+                  "raw": {"N": 1},
                   "prev": {
                     "m": {
                       "raw": {"N": 1},
@@ -72,40 +49,26 @@
                       "c": "m",
                       "depth": 5,
                       "val": "N"
-                    },
-                    "h": {
-                      "raw": {"N": 1},
-                      "prev": {},
-                      "c": "h",
-                      "depth": 5,
-                      "val": "N"
-                    },
-                    "d": {
-                      "raw": {"V": 1},
-                      "prev": {},
-                      "c": "d",
-                      "depth": 5,
-                      "val": "V"
                     }
                   },
                   "c": "o",
                   "depth": 4,
-                  "val": "NV"
+                  "val": "N"
                 }
               },
               "c": "u",
               "depth": 3,
-              "val": "NV"
+              "val": "N"
             }
           },
           "c": "s",
           "depth": 2,
-          "val": "NV"
+          "val": "N"
         }
       },
       "c": "e",
       "depth": 1,
-      "val": "NV"
+      "val": "N"
     }
   },
   "depth": 0,

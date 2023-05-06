@@ -16,11 +16,14 @@ const add = function (pairs, model, opts) {
     model = insert(w, tag, model)
   })
   model = deduce(model, opts)
+  console.log('\noriginal:')
+  fmt(model)
+
   let out = pack(model, opts)
   let done = unpack(out, opts)
-  // console.log(out)
+  console.log('\ncompressed:')
+  fmt(done)
   write(model)
-  fmt(model)
 }
 
 
