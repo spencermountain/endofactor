@@ -1,4 +1,4 @@
-import { depthFirst } from '../_crawl.js'
+import { depthFirst } from '../lib/_crawl.js'
 const MIN_CUTOFF = 10 //smallest percentage to allow
 
 const percent = (part, total) => {
@@ -8,7 +8,7 @@ const percent = (part, total) => {
 };
 
 // take raw counts, and conclude a Value for the node
-const deduce = function (model, opts = {}) {
+const deduce = function (model) {
   depthFirst(model, (node) => {
     let sum = 0
     let raw = node.raw || {}

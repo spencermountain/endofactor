@@ -1,26 +1,5 @@
-import { depthFirst } from '../_crawl.js'
+import { depthFirst } from '../lib/_crawl.js'
 
-const pack = function (model) {
-  let txt = ''
-  let last = 0
-  depthFirst(model, (node) => {
-    if (node.depth > last) {
-      let diff = node.depth - last
-      // txt += '\n' + ' '.repeat(node.depth)      // debug
-      txt += '['.repeat(diff)
-    } else if (node.depth === last) {
-      txt += ','
-    } else {
-      let diff = last - node.depth
-      txt += ']'.repeat(diff)
-      // txt += '\n' + ' '.repeat(node.depth) //debug
-    }
-    last = node.depth
-    txt += `${node.c}${node.val}`
-  })
-  // txt += ']'.repeat(last)
-  return txt
-}
 
 const getByPath = function (root, path) {
   let chars = path.split('')
@@ -75,4 +54,4 @@ const unpack = function (str) {
   })
   return root
 }
-export { pack, unpack }
+export default unpack

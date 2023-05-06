@@ -1,4 +1,4 @@
-import { get } from './crud/add-get.js'
+import { get } from '../set/add-get.js'
 
 const test = function (pairs, model) {
   pairs.forEach(a => {

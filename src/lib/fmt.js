@@ -1,4 +1,4 @@
-import { depthFirst } from '../_crawl.js'
+import { depthFirst } from './_crawl.js'
 
 const blue = str => '\x1b[34m' + str + '\x1b[0m'
 const b = str => '\x1b[1m' + str + '\x1b[0m'
